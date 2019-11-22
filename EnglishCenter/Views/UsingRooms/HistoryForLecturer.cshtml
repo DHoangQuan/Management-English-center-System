@@ -1,0 +1,37 @@
+﻿@model IEnumerable<EnglishCenter.Models.UsingRoom>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@foreach (var item in Model)
+{
+
+    <div class="row col-md-12" style="border:groove;">
+
+        <div class="col-md-4" style="margin-bottom:10px;margin-top:10px;">
+            <h2>Skill : @item.Class.Lesson.Topic.Skill.Name</h2>
+            <p>Topic: @item.Class.Lesson.Topic.TopicName</p>
+
+        </div>
+        <div class="col-md-4" style="margin-bottom:10px;margin-top:10px;">
+            <h2>Teacher :@item.Class.Person.Name</h2>
+            <p>Lessons : @item.Class.Lesson.LessonName</p>
+        </div>
+
+
+        <div class="col-md-4 ">
+            <div style="text-align: center; height:100%;">
+                <h2>Date: @Convert.ToDateTime(item.Date.ToString()).ToShortDateString() (@item.QuatityRegister)</h2>
+                <p>SLOT : @item.Slot.SlotName (@item.Slot.TimeStart - @item.Slot.TimeEnd)</p>
+                @if (Session["AllowAttendant"].ToString() == "Allow")
+                {
+                    <a class="" href="@Url.Action("CheckAttendance", "QuantityAndAttendances", new { usrid = item.UsingRoomID })">Check Attendance</a>
+                }
+                
+                
+            </div>
+        </div>
+
+    </div>
+    <br />
+
+}

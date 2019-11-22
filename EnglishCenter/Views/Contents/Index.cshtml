@@ -1,0 +1,96 @@
+﻿@model IEnumerable<EnglishCenter.Models.Content>
+
+@{
+    Layout = "~/Views/Shared/_BlogAdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table" id="tablecontent">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Person.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TopicPost.TopicName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.content_title)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.content_post)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.date_post)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Person.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TopicPost.TopicName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.content_title)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.content_post)
+                    </td>*@
+                <td>
+                    @if (item.status == "Enable")
+                    {
+                        <strong><span style="color: turquoise">@item.status</span></strong>
+                    }
+                    else if (item.status == "Slide")
+                    {
+                        <strong><span style="color: cornflowerblue">@item.status</span></strong>
+                    }
+                    else
+                    {
+                        <strong><span style="color: red">@item.status</span></strong>
+                    }
+
+                </td>
+                <td>
+
+                    <span>@Convert.ToDateTime(item.date_post.ToString()).ToShortDateString()</span>
+                </td>
+                <td>
+                    @if (Session["AllowEditBlog"].ToString() == "Allow")
+                    {
+                        <a href="@Url.Action("Enable", "Contents", new { id = item.content_id })" class="btn btn-outline-success btn-fw">Enable</a>
+                        <a href="@Url.Action("Slide", "Contents", new { id = item.content_id })" class="btn btn-outline-info btn-fw">Slide</a>
+                        <a href="@Url.Action("Disable", "Contents", new { id = item.content_id })" class="btn btn-outline-danger btn-fw">Disable</a>
+                        <a href="@Url.Action("Edit", "Edit", new { id = item.content_id })" class="btn btn-outline-primary btn-fw">Edit</a>
+                        @*@Html.ActionLink("Edit", "Edit", new { id = item.content_id })*@
+                    }
+                    else if (Session["AllowEditBlog"].ToString() == "NotAllow")
+                    {
+                        <a href="@Url.Action("Details", "Contents", new { id = item.content_id })" class="btn btn-outline-primary btn-fw">Details</a>
+                    }
+                    
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@*<script>
+    $(document).ready(function () {
+        $('#tablecontent').DataTable({
+            lengthMenu: [7, 10]
+        });
+    });
+</script>*@

@@ -1,0 +1,300 @@
+﻿@model EnglishCenter.Models.AuthenticationModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm())
+{
+    for (int i = 0; i < Model.Auth.Count(); i++)
+    {
+        <div class="row col-md-10">
+            <div class="col-md-5">
+                <h1>@Model.Auth[i].Person.Role.Role1 @Model.Auth[i].Person.Name</h1>
+                @Html.HiddenFor(model => model.Auth[i].PeopleID)
+            </div>
+        </div>
+
+        <br />
+        if (Session["RoleID"] != null)
+        {
+            if (Session["RoleID"].ToString() != "ROLE03")
+            {
+                <div class="row col-md-10">
+                    <div class="col-md-4">
+                        <label>Edit for Authentication</label>
+                    </div>
+                    <div class="col-md-2">
+                        @Html.CheckBoxFor(model => model.Auth[i].CheckEditAuthetication, new { style = "transform: scale(1.5);-webkit-transform: scale(1.5);" })
+                    </div>
+                    <div class="col-md-4">
+                        @if (Model.Auth[i].EditAuthetication == "Allow")
+                        {
+                            <label style="color:forestgreen;">@Model.Auth[i].EditAuthetication</label>
+                            @Html.HiddenFor(model => model.Auth[i].EditAuthetication)
+                        }
+                        else
+                        {
+                            <label style="color:red;">@Model.Auth[i].EditAuthetication</label>
+                            @Html.HiddenFor(model => model.Auth[i].EditAuthetication)
+                        }
+                    </div>
+                </div>
+                <br />
+            }
+        }
+        <div class="row col-md-10">
+            <div class="col-md-4">
+                <label>Comment Authentication</label>
+            </div>
+            <div class="col-md-2">
+                @Html.CheckBoxFor(model => model.Auth[i].CheckComment, new { style = "transform: scale(1.5);-webkit-transform: scale(1.5);" })
+            </div>
+            <div class="col-md-4">
+                @if (@Model.Auth[i].Comment == "Allow")
+                {
+                    <label style="color:forestgreen;">@Model.Auth[i].Comment</label>
+                    @Html.HiddenFor(model => model.Auth[i].Comment)
+                }
+                else
+                {
+                    <label style="color:red;">@Model.Auth[i].Comment</label>
+                    @Html.HiddenFor(model => model.Auth[i].Comment)
+                }
+
+            </div>
+        </div>
+        <br />
+        <div class="row col-md-10">
+            <div class="col-md-4">
+                <label>Create Post Authentication</label>
+            </div>
+            <div class="col-md-2">
+                @Html.CheckBoxFor(model => model.Auth[i].CheckCreatePost, new { style = "transform: scale(1.5);-webkit-transform: scale(1.5);" })
+            </div>
+            <div class="col-md-4">
+                @if (@Model.Auth[i].CreatePost == "Allow")
+                {
+                    <label style="color:forestgreen;">@Model.Auth[i].CreatePost</label>
+                    @Html.HiddenFor(model => model.Auth[i].CreatePost)
+                }
+                else
+                {
+                    <label style="color:red;">@Model.Auth[i].CreatePost</label>
+                    @Html.HiddenFor(model => model.Auth[i].CreatePost)
+                }
+            </div>
+        </div>
+        <br />
+        <div class="row col-md-10">
+            <div class="col-md-4">
+                <label>Edit Post Authentication</label>
+            </div>
+            <div class="col-md-2">
+                @Html.CheckBoxFor(model => model.Auth[i].CheckEditPost, new { style = "transform: scale(1.5);-webkit-transform: scale(1.5);" })
+            </div>
+            <div class="col-md-4">
+                @if (@Model.Auth[i].EditPost == "Allow")
+                {
+                    <label style="color:forestgreen;">@Model.Auth[i].EditPost</label>
+                    @Html.HiddenFor(model => model.Auth[i].EditPost)
+                }
+                else
+                {
+                    <label style="color:red;">@Model.Auth[i].EditPost</label>
+                    @Html.HiddenFor(model => model.Auth[i].EditPost)
+                }
+
+            </div>
+        </div>
+        <br />
+        if (Session["RoleID"] != null)
+        {
+            if (Session["RoleID"].ToString() != "ROLE03")
+            {
+                <div class="row col-md-10">
+                    <div class="col-md-4">
+                        <label>Class Authentication</label>
+                    </div>
+                    <div class="col-md-2">
+                        @Html.CheckBoxFor(model => model.Auth[i].CheckClass, new { style = "transform: scale(1.5);-webkit-transform: scale(1.5);" })
+                    </div>
+                    <div class="col-md-4">
+                        @if (@Model.Auth[i].Class == "Allow")
+                        {
+                            <label style="color:forestgreen;">@Model.Auth[i].Class</label>
+                            @Html.HiddenFor(model => model.Auth[i].Class)
+                        }
+                        else
+                        {
+                            <label style="color:red;">@Model.Auth[i].Class</label>
+                            @Html.HiddenFor(model => model.Auth[i].Class)
+                        }
+                    </div>
+                </div>
+                <br />
+                <div class="row col-md-10">
+                    <div class="col-md-4">
+                        <label>Room Authentication</label>
+                    </div>
+                    <div class="col-md-2">
+                        @Html.CheckBoxFor(model => model.Auth[i].CheckRoom, new { style = "transform: scale(1.5);-webkit-transform: scale(1.5);" })
+                    </div>
+                    <div class="col-md-4">
+                        @if (@Model.Auth[i].Room == "Allow")
+                        {
+                            <label style="color:forestgreen;">@Model.Auth[i].Room</label>
+                            @Html.HiddenFor(model => model.Auth[i].Room)
+                        }
+                        else
+                        {
+                            <label style="color:red;">@Model.Auth[i].Room</label>
+                            @Html.HiddenFor(model => model.Auth[i].Room)
+                        }
+                    </div>
+                </div>
+                <br />
+                <div class="row col-md-10">
+                    <div class="col-md-4">
+                        <label>Topic Authentication</label>
+                    </div>
+                    <div class="col-md-2">
+                        @Html.CheckBoxFor(model => model.Auth[i].CheckTopics, new { style = "transform: scale(1.5);-webkit-transform: scale(1.5);" })
+                    </div>
+                    <div class="col-md-4">
+                        @if (@Model.Auth[i].Topics == "Allow")
+                        {
+                            <label style="color:forestgreen;">@Model.Auth[i].Topics</label>
+                            @Html.HiddenFor(model => model.Auth[i].Topics)
+                        }
+                        else
+                        {
+                            <label style="color:red;">@Model.Auth[i].Topics</label>
+                            @Html.HiddenFor(model => model.Auth[i].Topics)
+                        }
+                    </div>
+                </div>
+                <br />
+                <div class="row col-md-10">
+                    <div class="col-md-4">
+                        <label>Skill Authentication</label>
+                    </div>
+                    <div class="col-md-2">
+                        @Html.CheckBoxFor(model => model.Auth[i].CheckSkills, new { style = "transform: scale(1.5);-webkit-transform: scale(1.5);" })
+                    </div>
+                    <div class="col-md-4">
+                        @if (@Model.Auth[i].Skills == "Allow")
+                        {
+                            <label style="color:forestgreen;">@Model.Auth[i].Skills</label>
+                            @Html.HiddenFor(model => model.Auth[i].Skills)
+                        }
+                        else
+                        {
+                            <label style="color:red;">@Model.Auth[i].Skills</label>
+                            @Html.HiddenFor(model => model.Auth[i].Skills)
+                        }
+                    </div>
+                </div>
+                <br />
+                <div class="row col-md-10">
+                    <div class="col-md-4">
+                        <label>Lesson Authentication</label>
+                    </div>
+                    <div class="col-md-2">
+                        @Html.CheckBoxFor(model => model.Auth[i].CheckLessons, new { style = "transform: scale(1.5);-webkit-transform: scale(1.5);" })
+                    </div>
+                    <div class="col-md-4">
+                        @if (@Model.Auth[i].Lessons == "Allow")
+                        {
+                            <label style="color:forestgreen;">@Model.Auth[i].Lessons</label>
+                            @Html.HiddenFor(model => model.Auth[i].Lessons)
+                        }
+                        else
+                        {
+                            <label style="color:red;">@Model.Auth[i].Lessons</label>
+                            @Html.HiddenFor(model => model.Auth[i].Lessons)
+                        }
+                    </div>
+                </div>
+                <br />
+            }
+        }
+        if (Session["RoleID"] != null)
+        {
+            if (@Model.Auth[i].Person.RoleID != "ROLE05")
+            {
+                <div class="row col-md-10">
+                    <div class="col-md-4">
+                        <label>Attendance Authentication</label>
+                    </div>
+                    <div class="col-md-2">
+                        @Html.CheckBoxFor(model => model.Auth[i].CheckAttendant, new { style = "transform: scale(1.5);-webkit-transform: scale(1.5);" })
+                    </div>
+                    <div class="col-md-4">
+                        @if (@Model.Auth[i].Attendant == "Allow")
+                        {
+                            <label style="color:forestgreen;">@Model.Auth[i].Attendant</label>
+                            @Html.HiddenFor(model => model.Auth[i].Attendant)
+                        }
+                        else
+                        {
+                            <label style="color:red;">@Model.Auth[i].Attendant</label>
+                            @Html.HiddenFor(model => model.Auth[i].Attendant)
+                        }
+                    </div>
+                </div>
+                <br />
+            }
+        }
+        if (Session["RoleID"] != null)
+        {
+            if (Session["RoleID"].ToString() != "ROLE03")
+            {
+                <div class="row col-md-10">
+                    <div class="col-md-4">
+                        <label>Edit Student Time Authentication</label>
+                    </div>
+                    <div class="col-md-2">
+                        @Html.CheckBoxFor(model => model.Auth[i].CheckEditStudentTime, new { style = "transform: scale(1.5);-webkit-transform: scale(1.5);" })
+                    </div>
+                    <div class="col-md-4">
+                        @if (@Model.Auth[i].EditStudentTime == "Allow")
+                        {
+                            <label style="color:forestgreen;">@Model.Auth[i].EditStudentTime</label>
+                            @Html.HiddenFor(model => model.Auth[i].EditStudentTime)
+                        }
+                        else
+                        {
+                            <label style="color:red;">@Model.Auth[i].EditStudentTime</label>
+                            @Html.HiddenFor(model => model.Auth[i].EditStudentTime)
+                        }
+                    </div>
+                </div>
+                <br />
+                <div class="row col-md-10">
+                    <div class="col-md-4">
+                        <label>Allow To ban the others</label>
+                    </div>
+                    <div class="col-md-2">
+                        @Html.CheckBoxFor(model => model.Auth[i].CheckAllowbanned, new { style = "transform: scale(1.5);-webkit-transform: scale(1.5);" })
+                    </div>
+                    <div class="col-md-4">
+                        @if (@Model.Auth[i].Allowbanned == "Allow")
+                        {
+                            <label style="color:forestgreen;">@Model.Auth[i].Allowbanned</label>
+                            @Html.HiddenFor(model => model.Auth[i].Allowbanned)
+                        }
+                        else
+                        {
+                            <label style="color:red;">@Model.Auth[i].Allowbanned</label>
+                            @Html.HiddenFor(model => model.Auth[i].Allowbanned)
+                        }
+                    </div>
+                </div>
+                <br />
+            }
+        }
+    }
+    <input class="btn btn-gradient-primary btn-rounded btn-fw col-md-6" type="submit" value="Submit" />
+}
+<br />
+@Html.ActionLink("<<<<Back", "Index", "People")

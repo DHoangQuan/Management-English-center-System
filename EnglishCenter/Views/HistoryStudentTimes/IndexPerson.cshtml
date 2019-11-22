@@ -1,0 +1,93 @@
+﻿@model IEnumerable<EnglishCenter.Models.HistoryStudentTime>
+
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.Raw(TempData["StudentTimeInform"])
+@if (Session["AllowStudentTime"].ToString() == "Allow")
+{
+
+    <form action="@Url.Action("AddSTime", "HistoryStudentTimes")" method="post">
+        <div>
+            <span>input number slots: </span>
+            <input style="width:300px; margin-top:5px;margin-bottom:5px;" class="form-control" type="number" name="numberofslot" />
+        </div>
+        <br />
+        <div>
+            <span>Note: </span>
+            <input style="width:300px; margin-top:5px;margin-bottom:5px;" class="form-control" type="text" name="Note" />
+        </div>
+        @*<input type="datetime" readonly="readonly" id="dateren" name="dateren" />*@
+        <button class="btn btn-gradient-info btn-fw" style="width:300px;" type="submit">Add</button>
+    </form>
+}
+@{
+    if (Model.Count() == 0)
+    {
+        <h1>This student has not been added any slots.</h1>
+    }
+    else
+    {
+        <table class="table">
+            <tr>
+                <th>
+                    <span>Staff</span>
+                </th>
+                <th>
+                    <span>Student</span>
+                </th>
+                <th>
+                    <span>Date Add</span>
+                </th>
+                <th>
+                    <span>Slots</span>
+                </th>
+                <th>
+                    <span>Note</span>
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Person.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Person1.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateAdd)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumberSlot)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Note)
+                    </td>
+                    <td>
+                        @if (Session["RoleID"].ToString() == "ROLE01" || Session["RoleID"].ToString() == "ROLE02")
+                        {
+                            if (Session["AllowStudentTime"].ToString() == "Allow")
+                            {
+                                @*@Html.ActionLink("Delete", "DeleteConfirmed", new { id = item.HistoryStudentTime1 }, new { onclick = "return confirm('Are you sure?');" })*@
+                                <a href="javascript:void(0);" class="minusslot" data-id="@item.HistoryStudentTime1" data-toggle="modal" data-target="#myModal">Minus Slots and Note</a>
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+
+        </table>
+    }
+    @Html.ActionLink("<<<<<Back", "Index", "People")
+}
+<div id='myModal' class='modal'>
+    <div class="modal-dialog" style="margin:auto;">
+        <div class="modal-content" style="width:1000px;margin-top:150px;">
+            <div id='myModalContent' style="padding: 20px;"></div>
+        </div>
+    </div>
+</div>

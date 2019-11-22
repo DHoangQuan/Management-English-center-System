@@ -1,0 +1,106 @@
+﻿@model IEnumerable<EnglishCenter.Models.Authentication>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Person.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EditAuthetication)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatePost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EditPost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Class)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Room)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Topics)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Skills)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Lessons)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Attendant)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EditStudentTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Notes)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Person.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EditAuthetication)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatePost)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EditPost)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Class)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Room)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Topics)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Skills)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lessons)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Attendant)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EditStudentTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Notes)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PeopleID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PeopleID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PeopleID })
+        </td>
+    </tr>
+}
+
+</table>

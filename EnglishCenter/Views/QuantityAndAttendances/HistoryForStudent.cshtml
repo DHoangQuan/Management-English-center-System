@@ -1,0 +1,55 @@
+﻿@model IEnumerable<EnglishCenter.Models.QuantityAndAttendance>
+@{
+    ViewBag.Title = "HistoryForStudent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@foreach (var item in Model)
+{
+
+    <div class="row col-md-12" style="border:groove;">
+
+        <div class="col-md-4" style="margin-bottom:10px;margin-top:10px;">
+            <h2>Skill : @item.UsingRoom.Class.Lesson.Topic.Skill.Name</h2>
+            <p>Topic: @item.UsingRoom.Class.Lesson.Topic.TopicName</p>
+                
+        </div>
+        <div class="col-md-4" style="margin-bottom:10px;margin-top:10px;" >
+            <h2>Teacher :@item.UsingRoom.Class.Person.Name</h2>
+            <p>Lessons : @item.UsingRoom.Class.Lesson.LessonName</p>
+        </div>
+
+        @if (item.Attendent == "Absent")
+        {
+            <div class="col-md-4 " style="background-color:#D8D8D8;text-align:center;padding-bottom:10px;padding-top:10px;">
+                <div style="text-align: center; height:100%;">
+                    <h2>@item.Attendent (@item.UsingRoom.Slot.SlotName)</h2>
+                    <p>@Convert.ToDateTime(item.UsingRoom.Date.ToString()).ToShortDateString() (@item.UsingRoom.Slot.TimeStart - @item.UsingRoom.Slot.TimeEnd)</p>
+
+                </div>
+            </div>
+        }
+        else if (item.Attendent == "Present")
+        {
+            <div class="col-md-4" style="background-color:#58FA58;text-align:center;padding-bottom:10px;padding-top:10px;">
+                <div style="text-align: center; height:100%;">
+                    <h2>@item.Attendent (@item.UsingRoom.Slot.SlotName)</h2>
+                    <p>@Convert.ToDateTime(item.UsingRoom.Date.ToString()).ToShortDateString() (@item.UsingRoom.Slot.TimeStart - @item.UsingRoom.Slot.TimeEnd)</p>
+
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-md-4" style="background-color:#FE2E2E;text-align:center;padding-bottom:10px;padding-top:10px;">
+                <div style="text-align: center; height:100%;">
+                    <h2>@item.Attendent (@item.UsingRoom.Slot.SlotName) </h2>
+                    <p>@Convert.ToDateTime(item.UsingRoom.Date.ToString()).ToShortDateString() (@item.UsingRoom.Slot.TimeStart - @item.UsingRoom.Slot.TimeEnd)</p>
+
+                </div>
+            </div>
+        }
+
+    </div>
+    <br />
+
+}

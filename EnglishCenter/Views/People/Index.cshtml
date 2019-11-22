@@ -1,0 +1,252 @@
+﻿@model IEnumerable<EnglishCenter.Models.Person>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<p>
+    @Html.ActionLink("Add new Account", "Create")
+</p>
+<table class="table" id="tablecontentForPeopleIndex">
+    <thead>
+        <tr>
+            <th>
+                <span>Image</span>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Role.Role1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Active)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DoB)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @if (item.Image == null || item.Image == "")
+                    {
+                        <img src="~/MaterialBlogTemplate/images/NoneImage.png" alt="image" />
+                    }
+                    else
+                    {
+                        <img src="@item.Image" alt="image" />
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Role.Role1)
+                </td>
+                <td>
+                    <a  href="@Url.Action("Details", "People", new {id = item.PeopleID })">
+                        <h2><span>@item.Name</span></h2>
+                    </a>
+                </td>
+                <td>
+                    @if (Session["RoleID"].ToString() == "ROLE01")
+                    {
+                        if (item.RoleID == "ROLE01")
+                        {
+                            if (item.Active == "Activated")
+                            {
+                                <strong><span class="text-success">@item.Active</span></strong>
+                            }
+                            else
+                            {
+                                <strong><span class="text-danger">@item.Active&nbsp;&nbsp;&nbsp;</span></strong>
+                            }
+                        }
+                        else
+                        {
+                            if (item.Active == "Activated")
+                            {
+                                <strong><span class="text-success">@item.Active</span></strong>
+                                if (Session["AllowBanned"].ToString() == "Allow")
+                                {
+                                    <span><a class="btn btn-gradient-danger btn-fw" href="@Url.Action("Banned", "People", new {id = item.PeopleID })">Banned</a></span>
+                                    
+                                }
+
+                            }
+                            else
+                            {
+                                <strong><span class="text-danger">@item.Active&nbsp;&nbsp;&nbsp;</span></strong>
+                                if (Session["AllowBanned"].ToString() == "Allow")
+                                {
+                                    <span><a class="btn btn-gradient-success btn-fw" href="@Url.Action("Activated", "People", new {id = item.PeopleID })">Activated</a></span>
+                                }
+                                
+                            }
+                        }
+                    }
+                    else if (Session["RoleID"].ToString() == "ROLE02")
+                    {
+                        if (item.RoleID == "ROLE01" || item.RoleID == "ROLE02")
+                        {
+                            if (item.Active == "Activated")
+                            {
+                                <strong><span class="text-success">@item.Active</span></strong>
+                            }
+                            else
+                            {
+                                <strong><span class="text-danger">@item.Active&nbsp;&nbsp;&nbsp;</span></strong>
+                            }
+                        }
+                        else
+                        {
+                            if (item.Active == "Activated")
+                            {
+                                <strong><span class="text-success">@item.Active</span></strong>
+                                if (Session["AllowBanned"].ToString() == "Allow")
+                                {
+                                    <span><a class="btn btn-gradient-danger btn-fw" href="@Url.Action("Banned", "People", new {id = item.PeopleID })">Banned</a></span>
+
+                                }
+                            }
+                            else
+                            {
+                                <strong><span class="text-danger">@item.Active&nbsp;&nbsp;&nbsp;</span></strong>
+                                if (Session["AllowBanned"].ToString() == "Allow")
+                                {
+                                    <span><a class="btn btn-gradient-success btn-fw" href="@Url.Action("Activated", "People", new {id = item.PeopleID })">Activated</a></span>
+                                }
+                            }
+                        }
+                    }
+                    else if (Session["RoleID"].ToString() == "ROLE03")
+                    {
+                        if (item.RoleID == "ROLE01" || item.RoleID == "ROLE02" || item.RoleID == "ROLE03")
+                        {
+                            if (item.Active == "Activated")
+                            {
+                                <strong><span class="text-success">@item.Active</span></strong>
+                            }
+                            else
+                            {
+                                <strong><span class="text-danger">@item.Active&nbsp;&nbsp;&nbsp;</span></strong>
+                            }
+                        }
+                        else
+                        {
+                            if (item.Active == "Activated")
+                            {
+                                <strong><span class="text-success">@item.Active</span></strong>
+                                if (Session["AllowBanned"].ToString() == "Allow")
+                                {
+                                    <span><a class="btn btn-gradient-danger btn-fw" href="@Url.Action("Banned", "People", new {id = item.PeopleID })">Banned</a></span>
+                                }
+                            }
+                            else
+                            {
+                                <strong><span class="text-danger">@item.Active&nbsp;&nbsp;&nbsp;</span></strong>
+                                if (Session["AllowBanned"].ToString() == "Allow")
+                                {
+                                    <span><a class="btn btn-gradient-success btn-fw" href="@Url.Action("Activated", "People", new {id = item.PeopleID })">Activated</a></span>
+                                }
+                            }
+                        }
+                    }
+                    @if (item.RoleID == "ROLE05")
+                    {
+                        <span><a class="btn btn-gradient-info btn-fw" href="@Url.Action("IndexPerson", "HistoryStudentTimes", new {id = item.PeopleID })">Student Time</a></span>
+                    }
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    <span>@Convert.ToDateTime(item.DoB.ToString()).ToShortDateString()</span>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+
+                <td>
+
+                    <a href="javascript:void(0);" class="ChangeIn4Index btn btn-gradient-info" data-id="@item.PeopleID" data-toggle="modal" data-target="#myModal">Edit Information</a>
+                    @*@Html.ActionLink("Details", "Details", new { id = item.PeopleID }) |*@
+                    @if (Session["AllowAuth"].ToString() == "Allow")
+                    {
+                        if (Session["RoleID"].ToString() == "ROLE01")
+                        {
+                            if (item.RoleID != "ROLE01")
+                            {
+                                <a class="btn btn-gradient-dark btn-fw" href="@Url.Action("IndexPerSonal", "Authentications", new {id = item.PeopleID })">Authentications</a>
+                            }
+                        }
+                        else if (Session["RoleID"].ToString() == "ROLE02")
+                        {
+                            if (item.RoleID != "ROLE01")
+                            {
+                                if (item.RoleID != "ROLE02")
+                                {
+                                <a class="btn btn-gradient-dark btn-fw" href="@Url.Action("IndexPerSonal", "Authentications", new {id = item.PeopleID })">Authentications</a>
+                                }
+                            }
+                        }
+                        else if (Session["RoleID"].ToString() == "ROLE03")
+                        {
+                            if (item.RoleID != "ROLE01")
+                            {
+                                if (item.RoleID != "ROLE02")
+                                {
+                                    if (item.RoleID != "ROLE03")
+                                    {
+                                    <a class="btn btn-gradient-dark btn-fw" href="@Url.Action("IndexPerSonal", "Authentications", new { id = item.PeopleID })">Authentications</a>
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                    @if (item.RoleID == "ROLE04")
+                    {
+                        <a class="btn btn-gradient-light btn-fw" href="@Url.Action("HistoryForLecturer", "UsingRooms", new { idpeople = item.PeopleID })">History of teaching</a>
+                    }
+                    @if (item.RoleID == "ROLE05")
+                    {
+                        <a class="btn btn-gradient-secondary btn-fw" href="@Url.Action("HistoryForStudent", "QuantityAndAttendances", new {idpeople = item.PeopleID })">History of Study</a>
+                    }
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div id='myModal' class='modal'>
+    <div class="modal-dialog">
+        <div class="modal-content" style="width:700px;">
+            <div id='myModalContent' style="padding: 20px"></div>
+        </div>
+    </div>
+
+</div>

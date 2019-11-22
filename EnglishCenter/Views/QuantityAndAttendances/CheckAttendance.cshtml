@@ -1,0 +1,102 @@
+﻿@model EnglishCenter.Models.QandAModel
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*@using (Html.BeginForm())
+    {
+        <table>
+            @for(int i=0; i< Model.QuantityAndAttendance.Count(); i++)
+            {
+                if( i%3 == 0)
+                {
+                    @:<tr></tr>
+                }
+                <td>
+                    @Html.CheckBoxFor(model => model.QuantityAndAttendance[i].IsChecked)
+                    <label>@Model.QuantityAndAttendance[i].Person.Name</label>
+                    @Html.HiddenFor(model => model.QuantityAndAttendance[i].QnAID)
+                    @Html.HiddenFor(model => model.QuantityAndAttendance[i].Attendent)
+                </td>
+            }
+        </table>
+        <input type="submit" value="Submit" />
+    }*@
+@using (Html.BeginForm())
+{
+    for (int i = 0; i < Model.QuantityAndAttendance.Count(); i++)
+    {
+
+        <div class="row col-md-12" style="border:groove;">
+
+            <div class="col-md-3" style="margin-top: 10px; margin-bottom: 10px;text-align:center;">
+                @if (@Model.QuantityAndAttendance[i].Person.Image == null)
+                {
+                    <img src="/MaterialBlogTemplate/images/NoneImage.png" width="50%" />
+                }
+                else
+                {
+                    <img src="@Model.QuantityAndAttendance[i].Person.Image" width="50%">
+                }
+            </div>
+            <div class="col-md-3" style="margin-top: 5%;text-align:center;">
+                @*<h2>@Html.LabelFor(model => model.QuantityAndAttendance[i].Person.Name)</h2>*@
+                <label>@Model.QuantityAndAttendance[i].Person.Name</label>
+                @Html.HiddenFor(model => model.QuantityAndAttendance[i].Person.Name)
+                @Html.HiddenFor(model => model.QuantityAndAttendance[i].Attendent)
+                @Html.HiddenFor(model => model.QuantityAndAttendance[i].QnAID)
+                @Html.HiddenFor(model => model.QuantityAndAttendance[i].UsingRoomID)
+            </div>
+
+                <div class="col-md-2" style="margin-top: 5%;">
+                    <div class="row" style="text-align:center;">
+                        <strong><span>Present:&nbsp;</span></strong>
+                        @*@Html.RadioButtonFor(model => model.QuantityAndAttendance[i].Present, true, new { Checked = "checked" })*@
+                        @Html.CheckBoxFor(model => model.QuantityAndAttendance[i].Present,new { style = "transform: scale(1.5);-webkit-transform: scale(1.5);" })
+                        
+                    </div>
+                </div>
+            
+                <div class="col-md-2" style="margin-top: 5%">
+                    <div class="row" style="text-align:center;">
+                        <strong><span>Absent:&nbsp;&nbsp;</span></strong>
+                        @Html.CheckBoxFor(model => model.QuantityAndAttendance[i].Absent, new { style = "transform: scale(1.5);-webkit-transform: scale(1.5);" })
+                    </div>
+                </div>
+          
+            @if (Model.QuantityAndAttendance[i].Attendent == "Absent")
+            {
+                <div class="col-md-2 " style="background-color:#FE2E2E;padding-top: 5%;text-align:center;">
+                    <div style="text-align: center; height:100%;">
+                        <label>@Model.QuantityAndAttendance[i].Attendent</label>
+
+                    </div>
+                </div>
+            }
+            else if (Model.QuantityAndAttendance[i].Attendent == "Present")
+            {
+                <div class="col-md-2" style="background-color:#58FA58;padding-top: 5%;text-align:center;">
+                    <div style="text-align: center; height:100%;">
+                        <label>@Model.QuantityAndAttendance[i].Attendent</label>
+
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="col-md-2" style="background-color:#D8D8D8;padding-top: 5%;text-align:center;">
+                    <div style="text-align: center; height:100%;">
+                        <label>@Model.QuantityAndAttendance[i].Attendent</label>
+
+                    </div>
+                </div>
+            }
+
+        </div>
+
+        <br />
+
+
+    }
+    <input class="btn btn-gradient-dark btn-rounded btn-fw col-md-12" type="submit" value="Submit" />
+}

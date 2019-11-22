@@ -1,0 +1,115 @@
+﻿@model EnglishCenter.Models.Person
+
+@{
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+    
+</head>
+<body>
+    <div>
+        <hr />
+        <br />
+        <div class="row col-md-12">
+            <div class="col-md-6">
+                <a href="javascript:void(0);" class="EditAva1 btn btn-gradient-info" data-id="@Model.PeopleID" data-toggle="modal" data-target="#myModal">Change Avatar</a>
+                <br />
+                @if (Model.Image == null || Model.Image == "")
+            {
+                    <img src="~/MaterialBlogTemplate/images/NoneImage.png" style="width: 100%;" alt="image" />
+                }
+                else
+                {
+                    <img src="@Model.Image" alt="image">
+                }
+            </div>
+
+            <div class="col-md-4">
+                <br />
+                <br />
+                <br />
+                <div class="row">
+                    <h2><span>&nbsp;Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Name</span></h2>
+                </div>
+                <br />
+                <div class="row">
+                    <h2><span>&nbsp;Phone:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Phone</span></h2>
+                </div>
+                <br />
+                <div class="row">
+                    <h2><span>&nbsp;DoB:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Convert.ToDateTime(Model.DoB.ToString()).ToShortDateString()</span></h2>
+                </div>
+                <br />
+                <div class="row">
+                    <h2><span>&nbsp;Gender:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Gender</span></h2>
+                </div>
+                <br />
+                <div class="row">
+                    <h2><span>&nbsp;Email:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Email</span></h2>
+                </div>
+                <br />
+                <div class="row">
+                    <h2><span>&nbsp;Address:&nbsp;&nbsp;&nbsp;@Model.Address</span></h2>
+                </div>
+                <br />
+            </div>
+        </div>
+        <br />
+    </div>
+        <div id='myModal' class='modal'>
+            <div class="modal-dialog">
+                <div class="modal-content" style="width:700px;">
+                    <div id='myModalContent' style="padding: 20px"></div>
+                </div>
+            </div>
+
+        </div>
+ 
+    <script>
+        $(function () {
+            $(".EditAva1").click(function () {
+                debugger;
+                var $buttonClicked = $(this);
+                var id = $buttonClicked.attr('data-id');
+                var options = { "backdrop": "static", keyboard: true };
+                $.ajax({
+                    type: "GET",
+                    url: '/People/EditAva',
+                    contentType: "application/json; charset=utf-8",
+                    data: { "id": id },
+                    datatype: "json",
+                    success: function (data) {
+                        debugger;
+                        $('#myModalContent').html(data);
+                        $(document).ready(function () {
+                            $("#EditAvaBrownButton").click(function () {
+                                var finder = new CKFinder();
+                                finder.selectActionFunction = function (fileUrl) {
+                                    //code js ở đây
+                                    $("#EditLinkOfAva").val(fileUrl);
+                                };
+                                finder.popup();
+                            });
+                        });
+                        //$('#myModal').modal(options);
+                        //$('#myModal').modal('show');
+                    },
+                    error: function () {
+                        alert("Dynamic content load failed.");
+                    }
+                });
+            });
+        });
+    </script>
+    @*<p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.PeopleID }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>*@
+</body>
+</html>
